@@ -1,0 +1,97 @@
+package com.company;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+
+public class MyPoem extends JFrame {
+
+    private static JLabel label;
+    private static MyPoem st;
+    private JButton b1;
+    private JButton b2;
+    private JButton b3;                  //待开发
+
+    protected static String s;           //保存文本框内容
+    //private JTextField txt;
+    private JTextArea txa;
+    private String tishi="保存成功！";
+    public MyPoem() {
+        super("我来写诗词");
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setSize(800, 600);
+        setVisible(true);
+
+        //设置窗体布局　
+        setLayout(new FlowLayout());
+        //添加标签
+        label = new JLabel("白板");
+        add(label);
+        //添加文本区域
+        txa = new JTextArea(10,70);           //设置白板10行70列
+        add(txa);
+        //添加按钮
+        b1 = new JButton("保存");
+        b2 = new JButton("清除全部");
+        b3 = new JButton("发布到平台");
+
+        add(b1);
+        add(b2);
+        add(b3);        //待开发
+
+        b1.addActionListener(new ActionListener() {         //b1按键的事件监听（保存）
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                // TODO Auto-generated method stub
+                //txa.append("this is JText Area\n");       //test
+                s = txa.getText();                          //获取文本框的内容
+                //System.out.println(s);
+                JOptionPane.showMessageDialog(null, tishi, "提示", JOptionPane.PLAIN_MESSAGE);
+                FileWriter out;
+                try {
+                    out = new FileWriter("D:/MyPoem.txt");
+                    out.write(s);                           //将文本内容保存到文件中
+                    out.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        b2.addActionListener(new ActionListener(){           //b2按键的事件监听（清除）
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                // TODO Auto-generated method stub
+                txa.setText("");            //刷新文本框
+            }
+        });
+        /*b3.addActionListener(new ActionListener() {        //b3平台待开发
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                // TODO Auto-generated method stub
+            }
+        });*/
+    }
+
+    /**
+     * @param args
+     * @throws InterruptedException
+     */
+    public static void main(String[] args) throws InterruptedException{
+
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                st = new MyPoem();
+            }
+        });
+
+    }
+
+}
