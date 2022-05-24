@@ -1,0 +1,30 @@
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Search {
+    protected String line;
+    //protected String s1;                //用来保存传递的信息参数
+    public Search(String s){
+        //s1=s;
+        try {
+            // create a reader instance
+            BufferedReader br = new BufferedReader(new FileReader("D:\\IdeaProjects\\untitled1\\src\\poetry.txt"));
+            while((line=br.readLine()) != null) {
+                        if(line.equals(s))
+                        {
+                            System.out.println("1111");
+                            //System.out.println(s);
+                            break;
+                        }
+                //System.out.println(line);
+            }
+            br.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        //System.out.println(line);
+    }
+}
