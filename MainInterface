@@ -1,0 +1,157 @@
+package com.company;
+
+import java.awt.*;
+import java.awt.event.ActionListener;  // 动作 监听 （event事件）
+import java.awt.event.ActionEvent;     // 动作 事件
+import java.io.BufferedReader;
+import java.io.FileReader;             //读取 文件
+import java.io.IOException;
+import javax.swing.JFrame;       // 窗体
+import javax.swing.JButton;      // 按钮
+import javax.swing.BorderFactory;// 边框 工厂
+import javax.swing.Icon;         // 图标
+import javax.swing.ImageIcon;    // 图片 图标
+import javax.swing.JOptionPane;  //导入java.swing包下的JOptionPane类
+import java.util.Random;         //随机数
+
+public class MainInterface {
+
+    JFrame f=new JFrame("主界面");   // 创建窗体
+    Container c;                         // 容器
+    //protected static String s;           //保存搜索框内容
+    String s;                            //保存搜索框内容
+    String line;
+    Random r = new Random();
+    String shiju[] = {"海上生明月，天涯共此时。张九龄《望月怀远》","但愿人长久，千里共婵娟。苏轼《水调歌头》","人生自古谁无死，留取丹心照汗青。文天祥《过零丁洋》",
+            "天生我材必有用，千金散尽还复来。李白《将进酒》","寻寻觅觅，冷冷清清，凄凄惨惨戚戚。李清照《声声慢》","两情若是久长时，又岂在朝朝暮暮。秦观《鹊桥仙》",
+            "人面不知何处去，桃花依旧笑春风。崔护《题都城南庄》","关关雎鸠，在河之洲。窈窕淑女，君子好逑。《关雎》"
+    };                                   //诗词赏析
+    /*
+        way2
+        容器c，嵌入窗体，即添加组件“按钮”
+    */
+    void way2(){
+        // content（包含），pane(窗格)
+        c=f.getContentPane();                   // 容器嵌入窗体中
+        // 网格布局。（行，列，水平间距，垂直间距）
+        c.setLayout(new FlowLayout(FlowLayout.LEFT,20,20)); //流式布局
+        TextArea search = new TextArea(1,12);
+
+        c.add(search);                          //加入索引框
+        JButton searchb = new JButton("搜索");
+        searchb.setBackground(Color.lightGray);
+        c.add(searchb);                         //加入搜索按键
+        JButton btn[]=new JButton[4];           // 功能按键x4
+        for(int i_1=0;i_1<btn.length;i_1++){    // length（长度）
+            btn[i_1]=new JButton("按钮"+i_1);
+            c.add(btn[i_1]);                    //添加功能按键
+        }
+        //搜索功能
+        searchb.addActionListener(new ActionListener(){     // 动作监听器
+        // performed(执行)，event(事件)
+            public void actionPerformed(ActionEvent e){     // 动作事件
+                s=search.getText();
+                //System.out.println(s);
+                try {
+                    // create a reader instance
+                    BufferedReader br = new BufferedReader(new FileReader("D:\\poetry.txt"));
+                    //String line;
+                    while((line=br.readLine()) != null) {
+                        if(line==s)
+                        {
+                            System.out.println("1111");
+                            //System.out.println(s);
+                            break;
+                        }
+
+                    }
+                    br.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
+        // 朗读功能按键（开发中）
+        btn[0].setText("");
+        btn[0].setBackground(Color.darkGray);   // 背景颜色
+        btn[0].setEnabled(true);                // enabled(启用)，按钮设置不可启用
+        Icon icon_3=new ImageIcon("C:\\Users\\WSF\\Desktop\\e3.png"); // 图标，图像图标，路径
+        btn[0].setIcon(icon_3);
+        btn[0].addActionListener(new ActionListener(){                        // 动作监听器
+        // performed(执行)，event(事件)
+        public void actionPerformed(ActionEvent e){
+        //弹出朗读功能界面
+
+                }
+            }
+        );
+        // 交流平台界面（待开发）
+        btn[1].setText("");
+        btn[1].setBackground(Color.lightGray);                               // 背景颜色
+        Icon icon_4=new ImageIcon("C:\\Users\\WSF\\Desktop\\e4.png");// 图标，图像图标，路径
+        btn[1].setIcon(icon_4);
+        btn[1].setEnabled(false);
+        btn[1].addActionListener(new ActionListener(){                      // 动作监听器
+        // performed(执行)，event(事件)
+        public void actionPerformed(ActionEvent e){                         // 动作事件
+        //弹出用户交流平台
+
+                 }
+             }
+        );
+        // 诗词赏析
+        btn[2].setText("");                     // 文本
+        btn[2].setBackground(Color.darkGray);   // 背景颜色
+        btn[2].setBorderPainted(false);         // 设置为无边框
+        Icon icon_1=new ImageIcon("C:\\Users\\WSF\\Desktop\\e.png");// 图标，图像图标，路径
+        btn[2].setIcon(icon_1);// 按钮设置图片
+        btn[2].addActionListener(new ActionListener(){                      // 动作监听器
+        // performed(执行)，event(事件)
+        public void actionPerformed(ActionEvent e){                         // 动作事件
+        //弹出一个诗词赏析界面
+            int num = r.nextInt(8);                                  //随机数（shiju[]中的诗句个数）
+            //使用消息提示框输出信息
+            JOptionPane.showMessageDialog(null, shiju[num],"精美诗词", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        );
+
+        // 我来写诗词
+        btn[3].setText("");
+        btn[3].setBackground(Color.darkGray);                                // 背景颜色
+        btn[3].setBorder(BorderFactory.createLineBorder(Color.darkGray));    // 边框
+        Icon icon_2=new ImageIcon("C:\\Users\\WSF\\Desktop\\e2.png");// 图标，图像图标，路径
+        btn[3].setIcon(icon_2);
+        // Action（动作），listener(监听器)
+        btn[3].addActionListener(new ActionListener(){                       // 动作监听器
+        // performed(执行)，event(事件)
+        public void actionPerformed(ActionEvent e){                          // 动作事件
+        //弹出我来写诗词界面
+            new MyPoem();
+                }
+            }
+        );
+    }
+
+    /*
+        way1
+        窗体的属性
+    */
+    void way1(){
+        f.setBounds(600,90,500,750);        // 窗体坐标、尺寸
+        // Default(默认)，Operattion(操作)
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);      // 点×即关闭
+        // 不在此处设置窗体可见，因为有些组件后面添加会看不到，则在最后再“可见”
+
+    }
+
+    public static void main(String[] args) {
+        MainInterface d=new MainInterface();
+        d.way1();// 窗体属性
+        d.way2();// 容器，布置组件
+        d.f.setVisible(true);// 窗体 可见
+
+    }
+}
