@@ -79,65 +79,6 @@ public class LoginListener implements ActionListener{
                     d.f.setVisible(true);// 窗体 可见
                     break;
                 }
-                /*else if(i>=2)
-                {
-                    JLabel message = new JLabel("账号或密码错误,您今天还有"+(i-1)+"次机会");
-                    message.setFont(new Font("宋体",Font.PLAIN,14));  //宋体，正常风格，14号字体
-                    message.setPreferredSize(dim3);
-                    //将textName标签添加到窗体上
-                    jp1.add(message);
-                    login2.add(jp1,BorderLayout.CENTER);
-
-                    JButton close = new JButton("确定");
-                    close.setFont(new Font("宋体",Font.PLAIN,14));
-                    //设置按键大小
-                    close.setSize(dim3);
-                    jp2.add(close);
-                    login2.add(jp2,BorderLayout.SOUTH);
-
-                    i--;//次数减少
-                    close.addActionListener(new ActionListener()
-                    {
-                        public void actionPerformed(ActionEvent e)
-                        {
-                            login2.dispose();
-                        }
-                    });
-
-                    login2.setResizable(false);
-                    login2.setVisible(true);
-                }
-
-                else if(i == 1)
-                {
-                    JLabel message = new JLabel("账号已锁定，请明天再试");
-                    message.setFont(new Font("宋体",Font.PLAIN,14));  //宋体，正常风格，14号字体
-                    message.setPreferredSize(dim3);
-                    //将textName标签添加到窗体上
-                    jp1.add(message);
-                    login2.add(jp1,BorderLayout.CENTER);
-
-                    JButton close = new JButton("确定");
-                    close.setFont(new Font("宋体",Font.PLAIN,14));
-                    //设置按键大小
-                    close.setSize(dim3);
-                    jp2.add(close);
-                    login2.add(jp2,BorderLayout.SOUTH);
-
-                    close.addActionListener(new ActionListener()
-                    {
-                        public void actionPerformed(ActionEvent e)
-                        {
-                            login2.dispose();
-                        }
-                    });
-
-                    login2.setResizable(false);
-                    login2.setVisible(true);
-
-                    //通过我们获取的登录界面对象，用dispose方法关闭它
-                    login.dispose();
-                }*/
             }
             //依次关闭对象
             rSet.close();
