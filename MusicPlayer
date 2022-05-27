@@ -1,0 +1,26 @@
+
+    static Player player = null;
+
+    //播放 20 秒并结束播放
+    public void play() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    File file = new File("C:\\Users\\WSF\\Music\\凉州词.mp3");
+                    FileInputStream fis = new FileInputStream(file);
+                    BufferedInputStream stream = new BufferedInputStream(fis);
+                    player = new Player(stream);
+                    player.play();
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+            }
+        }).start();
+        try {
+            Thread.sleep(5000);         //播放5秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        player.close();
+    }
